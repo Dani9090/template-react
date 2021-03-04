@@ -1,0 +1,16 @@
+{
+"extends": ["react-app", "react-app/jest", "plugin:prettier/recomended", "prettier"],
+"plugins": ["prettier"],
+"rules": {
+    "prettier/prettier": "error",
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off"
+  }
+
+"env": {
+    "browser":true,
+    "node":true,
+    "es6":true
+},
+"parser":"babel-eslint"
+}
