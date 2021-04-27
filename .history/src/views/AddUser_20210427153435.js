@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FormField from 'components/molecules/FormField/FormField';
 import { Button } from 'components/atoms/Button/Button';
@@ -15,7 +15,6 @@ const initialFormState = {
 
 const AddUser = () => {
   const [formValues, setFormValues] = useState(initialFormState);
-  const context = useContext(UsersContext);
 
   const handleInputChange = (e) => {
     setFormValues({
@@ -23,13 +22,12 @@ const AddUser = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmitUser = (e) => {
-    e.preventDefault();
-    context.handleAddUser(formValues);
-    setFormValues(initialFormState);
+  const handleSubmitUser = () => {
+    handleAddUser();
   };
   return (
-    <ViewWrapper as="form" onSubmit={handleSubmitUser}>
+    <ViewWrapper as="form" onSubmit={ctx.handleAddUser}>
+      {console.log(ctx)}
       <Title>Add new student</Title>
       <FormField label="Name" id="name" name="name" value={formValues.name} onChange={handleInputChange} />
       <FormField label="Attendance" id="attendance" name="attendance" value={formValues.attendance} onChange={handleInputChange} />
@@ -39,9 +37,9 @@ const AddUser = () => {
   );
 };
 
-// AddUser.propTypes = {
-//   formValues: PropTypes.shape(UserShape),
-//   handleInputChange: PropTypes.func.isRequired,
-// };
+AddUser.propTypes = {
+  formValues: PropTypes.shape(UserShape),
+  handleInputChange: PropTypes.func.isRequired,
+};
 
 export default AddUser;

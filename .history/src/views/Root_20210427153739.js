@@ -24,6 +24,7 @@ const Root = () => {
   };
 
   const handleAddUser = (formValues) => {
+    e.preventDefault();
     const newUser = {
       name: formValues.name,
       attendance: formValues.attendance,
@@ -48,7 +49,7 @@ const Root = () => {
             <Wrapper>
               <Switch>
                 <Route path="/add-user">
-                  <AddUser />
+                  <AddUser formValues={formValues} handleInputChange={handleInputChange} />
                 </Route>
                 <Route path="/">
                   <Dashboard deleteUser={deleteUser} users={users} />

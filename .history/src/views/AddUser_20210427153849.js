@@ -25,8 +25,8 @@ const AddUser = () => {
   };
   const handleSubmitUser = (e) => {
     e.preventDefault();
-    context.handleAddUser(formValues);
-    setFormValues(initialFormState);
+    context.handleAddUser();
+    
   };
   return (
     <ViewWrapper as="form" onSubmit={handleSubmitUser}>

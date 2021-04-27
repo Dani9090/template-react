@@ -25,7 +25,7 @@ const AddUser = () => {
   };
   const handleSubmitUser = (e) => {
     e.preventDefault();
-    context.handleAddUser(formValues);
+    context.handleAddUser();
     setFormValues(initialFormState);
   };
   return (

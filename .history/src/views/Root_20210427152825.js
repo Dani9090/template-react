@@ -9,6 +9,12 @@ import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import AddUser from 'views/AddUser';
 import Dashboard from 'views/Dashboard';
 
+const initialFormState = {
+  name: '',
+  attendance: '',
+  average: '',
+};
+
 export const UsersContext = React.createContext({
   users: [],
   handleAddUser: () => {},
@@ -18,12 +24,21 @@ export const UsersContext = React.createContext({
 const Root = () => {
   const [users, setUsers] = useState(usersData);
 
+
   const deleteUser = (name) => {
     const filteredUsers = users.filter((user) => user.name !== name);
     setUsers(filteredUsers);
   };
 
-  const handleAddUser = (formValues) => {
+  const handleInputChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleAddUser = (e) => {
+    e.preventDefault();
     const newUser = {
       name: formValues.name,
       attendance: formValues.attendance,
@@ -31,6 +46,7 @@ const Root = () => {
     };
 
     setUsers([newUser, ...users]);
+    setFormValues(initialFormState);
   };
 
   return (
@@ -48,7 +64,7 @@ const Root = () => {
             <Wrapper>
               <Switch>
                 <Route path="/add-user">
-                  <AddUser />
+                  <AddUser formValues={formValues} handleInputChange={handleInputChange} />
                 </Route>
                 <Route path="/">
                   <Dashboard deleteUser={deleteUser} users={users} />

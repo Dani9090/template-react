@@ -23,7 +23,8 @@ const Root = () => {
     setUsers(filteredUsers);
   };
 
-  const handleAddUser = (formValues) => {
+  const handleAddUser = (form) => {
+    e.preventDefault();
     const newUser = {
       name: formValues.name,
       attendance: formValues.attendance,
@@ -31,6 +32,7 @@ const Root = () => {
     };
 
     setUsers([newUser, ...users]);
+    setFormValues(initialFormState);
   };
 
   return (
@@ -48,7 +50,7 @@ const Root = () => {
             <Wrapper>
               <Switch>
                 <Route path="/add-user">
-                  <AddUser />
+                  <AddUser formValues={formValues} handleInputChange={handleInputChange} />
                 </Route>
                 <Route path="/">
                   <Dashboard deleteUser={deleteUser} users={users} />

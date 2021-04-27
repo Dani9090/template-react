@@ -24,6 +24,7 @@ const Root = () => {
   };
 
   const handleAddUser = (formValues) => {
+    e.preventDefault();
     const newUser = {
       name: formValues.name,
       attendance: formValues.attendance,

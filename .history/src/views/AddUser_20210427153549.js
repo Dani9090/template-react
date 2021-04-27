@@ -23,10 +23,8 @@ const AddUser = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmitUser = (e) => {
-    e.preventDefault();
-    context.handleAddUser(formValues);
-    setFormValues(initialFormState);
+  const handleSubmitUser = () => {
+    context.handleAddUser();
   };
   return (
     <ViewWrapper as="form" onSubmit={handleSubmitUser}>

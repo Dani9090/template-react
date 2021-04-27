@@ -23,13 +23,11 @@ const AddUser = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmitUser = (e) => {
-    e.preventDefault();
-    context.handleAddUser(formValues);
-    setFormValues(initialFormState);
+  const handleSubmitUser = () => {
+    context.handleAddUser();
   };
   return (
-    <ViewWrapper as="form" onSubmit={handleSubmitUser}>
+    <ViewWrapper as="form" onSubmit={handleAddUser}>
       <Title>Add new student</Title>
       <FormField label="Name" id="name" name="name" value={formValues.name} onChange={handleInputChange} />
       <FormField label="Attendance" id="attendance" name="attendance" value={formValues.attendance} onChange={handleInputChange} />
