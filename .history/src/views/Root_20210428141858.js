@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { theme } from 'assets/styles/theme';
 import { Wrapper } from './Root.styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import AddUser from 'views/AddUser';
 import Dashboard from 'views/Dashboard';
-import UsersProvider from 'providers/UsersProvider';
 
+e;
 const Root = () => {
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <MainTemplate>
-          <UsersProvider>
+          <UsersContext.Provider
+            value={{
+              users,
+              handleAddUser,
+              deleteUser,
+            }}
+          >
             <Wrapper>
               <Switch>
                 <Route path="/add-user">
@@ -26,7 +33,7 @@ const Root = () => {
                 </Route>
               </Switch>
             </Wrapper>
-          </UsersProvider>
+          </UsersContext.Provider>
         </MainTemplate>
       </ThemeProvider>
     </Router>

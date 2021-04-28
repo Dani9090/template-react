@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
+
 import FormField from 'components/molecules/FormField/FormField';
 import { Button } from 'components/atoms/Button/Button';
+
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
 import { Title } from 'components/atoms/Title/Title';
-import { UsersContext } from 'providers/UsersProvider';
+import { UsersContext } from 'views/Root';
 
 const initialFormState = {
   name: '',
@@ -28,7 +30,6 @@ const AddUser = () => {
   };
   return (
     <ViewWrapper as="form" onSubmit={handleSubmitUser}>
-      {console.log(context)}
       <Title>Add new student</Title>
       <FormField label="Name" id="name" name="name" value={formValues.name} onChange={handleInputChange} />
       <FormField label="Attendance" id="attendance" name="attendance" value={formValues.attendance} onChange={handleInputChange} />
