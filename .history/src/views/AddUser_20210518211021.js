@@ -18,8 +18,6 @@ const reducer = (state, action) => {
         ...state,
         [action.field]: action.value,
       };
-    case 'CLEAR VALUES':
-      return initialFormState;
     default:
       return state;
   }
@@ -29,11 +27,10 @@ const AddUser = () => {
   const context = useContext(UsersContext);
 
   const handleInputChange = (e) => {
-    dispatch({
-      type: 'INPUT CHANGE',
-      field: e.target.name,
-      value: e.target.value,
-    });
+dispatch({
+  tpe:'INPUT CHANGE',
+  fi
+})
 
     // setFormValues({
     //   ...formValues,
@@ -43,9 +40,7 @@ const AddUser = () => {
   const handleSubmitUser = (e) => {
     e.preventDefault();
     context.handleAddUser(formValues);
-    dispatch({
-      type: 'CLEAR VALUES',
-    });
+    setFormValues(initialFormState);
   };
   return (
     <ViewWrapper as="form" onSubmit={handleSubmitUser}>

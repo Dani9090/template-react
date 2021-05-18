@@ -14,38 +14,25 @@ const initialFormState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'INPUT CHANGE':
-      return {
-        ...state,
-        [action.field]: action.value,
-      };
-    case 'CLEAR VALUES':
-      return initialFormState;
-    default:
-      return state;
+      return{
+        ...state
+      }
   }
 };
 const AddUser = () => {
-  const [formValues, dispatch] = useReducer(reducer, initialFormState);
+  const [formValues, setFormValues] = useReducer(reducer, initialFormState);
   const context = useContext(UsersContext);
 
   const handleInputChange = (e) => {
-    dispatch({
-      type: 'INPUT CHANGE',
-      field: e.target.name,
-      value: e.target.value,
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value,
     });
-
-    // setFormValues({
-    //   ...formValues,
-    //   [e.target.name]: e.target.value,
-    // });
   };
   const handleSubmitUser = (e) => {
     e.preventDefault();
     context.handleAddUser(formValues);
-    dispatch({
-      type: 'CLEAR VALUES',
-    });
+    setFormValues(initialFormState);
   };
   return (
     <ViewWrapper as="form" onSubmit={handleSubmitUser}>
