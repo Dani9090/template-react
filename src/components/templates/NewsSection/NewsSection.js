@@ -1,62 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import { ArticleWrapper, Wrapper, TitleWrapper, ContentWrapper } from '../NewsSection/NewsSection.styles';
+import { ArticleWrapper, ContentWrapper, NewsSectionHeader, TitleWrapper, Wrapper } from 'components/templates/NewsSection/NewsSection.styles';
 import { Button } from 'components/atoms/Button/Button';
 import axios from 'axios';
 
-const API_TOKEN = 'e7ed2e48e25d6a4f8d3786d2a2ae0b';
-// const data = [
-//   {
-//     title: 'News feed section',
-//     category: 'Tech news',
-//     content: 'lorem Amet et sit qui aliqua nisi tempor ex dolore esse.',
-//     image: null,
-//   },
-//   {
-//     title: 'News feed section2',
-//     category: 'Tech news',
-//     content: 'lorem Amet et sit qui aliqua nisi tempor ex dolore esse.',
-//     image: 'https://unsplash.it/500/400',
-//   },
-//   {
-//     title: 'News feed section3',
-//     category: 'Tech news',
-//     content: 'lorem Amet et sit qui aliqua nisi tempor ex dolore esse.',
-//     image: null,
-//   },
-// ];
+export const query = `
+         {
+          allArticles {
+            id
+            title
+            category
+            content
+            image {
+              url
+            }
+          }
+        }
+      `;
 
 const NewsSection = () => {
   const [articles, setArticles] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.post(
-      'https://graphql.datocms.com/',
-      {},
-      {
-        headers: {
-          authorization: `bearer ${API_TOKEN}`,
+    axios
+      .post(
+        'https://graphql.datocms.com/',
+        {
+          query,
         },
-      }
-    );
-  });
+        {
+          headers: {
+            authorization: `Bearer ${process.env.REACT_APP_DATOCMS_TOKEN}`,
+          },
+        }
+      )
+      .then(({ data: { data } }) => {
+        setArticles(data.allArticles);
+      })
+      .catch(() => {
+        setError(`Sorry, we couldn't load articles for you`);
+      });
+  }, []);
+
   return (
     <Wrapper>
-      <h2>News feed section</h2>
-      {articles.map(({ title, category, content, image = null }) => (
-        <ArticleWrapper key={title}>
-          <TitleWrapper>
-            <h3>{title}</h3>
-            <p>{category}</p>
-          </TitleWrapper>
-          <ContentWrapper>
-            <p>{content}</p>
-            {image ? <img src={image} alt="article_imgae" /> : null}
-          </ContentWrapper>
-
-          <Button isBig>Read more</Button>
-        </ArticleWrapper>
-      ))}
+      <NewsSectionHeader>University news feed</NewsSectionHeader>
+      {articles.length > 0 ? (
+        articles.map(({ id, title, category, content, image = null }) => (
+          <ArticleWrapper key={id}>
+            <TitleWrapper>
+              <h3>{title}</h3>
+              <p>{category}</p>
+            </TitleWrapper>
+            <ContentWrapper>
+              <p>{content}</p>
+              {image ? <img src={image.url} alt="article" /> : null}
+            </ContentWrapper>
+            <Button isBig>Read more</Button>
+          </ArticleWrapper>
+        ))
+      ) : (
+        <NewsSectionHeader>{error ? error : 'Loading...'}</NewsSectionHeader>
+      )}
     </Wrapper>
   );
 };
+
 export default NewsSection;

@@ -22,7 +22,7 @@ import { Title } from 'components/atoms/Title/Title';
 //     attendance: '',
 //     average: '',
 // }
-const UsersList = ({ deleteUser, users }) => {
+const UsersList = ({ deleteUser, users = [] }) => {
   // const [users, setUsers] = useState(usersData);
   // const [formValues, setFormValues] = useState(initialFormState);
   // // const [isLoading, setLoadingState] = useState([]);
