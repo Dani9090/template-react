@@ -74,7 +74,6 @@ const AddUser = () => {
   };
   return (
     <ViewWrapper as="form" onSubmit={handleSubmitUser}>
-      {console.log(context)}
       <Title>Add new student</Title>
       <FormField label="Name" id="name" name="name" value={formValues.name} onChange={handleInputChange} />
       <FormField label="Attendance" id="attendance" name="attendance" value={formValues.attendance} onChange={handleInputChange} />
