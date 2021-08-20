@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { users as usersData } from 'data/users';
 
 export const UsersContext = React.createContext({
   users: [],
