@@ -4,6 +4,7 @@ import debounce from 'lodash.debounce';
 import { SearchBarWrapper, SearchResults, SearchWrapper, SearchResultItem, StatusInfo } from 'components/organisms/SearchBar/SearchBar.styles';
 import { useStudents } from 'hooks/useStudents';
 import { useCombobox } from 'downshift';
+
 export const SearchBar = () => {
   const [matchingStudents, setMatchingStudents] = useState([]);
   const { findStudents } = useStudents();
@@ -27,7 +28,7 @@ export const SearchBar = () => {
         </p>
       </StatusInfo>
       <SearchWrapper {...getComboboxProps()}>
-        <Input {...getInputProps()} name="Search" id="Search" />
+        <Input {...getInputProps()} name="Search" id="Search" placeholder="Search" />
 
         <SearchResults isVisible={isOpen && matchingStudents.length > 0} {...getMenuProps()}>
           {isOpen &&
