@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 // import AddUser from 'views/AddUser';
 import Dashboard from 'views/Dashboard';
+
 // import UsersProvider from 'providers/UsersProvider';
 
 const Root = () => {
