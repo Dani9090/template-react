@@ -11,8 +11,9 @@ const Navigation = () => {
           Buddy
         </h1>
       </Logo>
-      <StyledLink to="/group" exact>
-        Dashboard
+      <StyledLink to="/group">Dashboard</StyledLink>
+      <StyledLink as="a" onClick={() => localStorage.removeItem('token')}>
+        Log out
       </StyledLink>
       {/* <StyledLink to="/add-user">Add user</StyledLink> */}
       {/* <StyledLink to="/">Settings</StyledLink>
