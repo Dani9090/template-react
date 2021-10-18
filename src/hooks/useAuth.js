@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 const AuthContext = React.createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useOutate(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -24,7 +24,8 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const singIn = async (login, password) => {
+  const singIn = async ({ login, password }) => {
+    
     try {
       const response = await axios.post('/login', {
         login,
@@ -43,10 +44,10 @@ export const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={{ user, singIn, singOut }}>{children}</AuthContext.Provider>;
 };
-export useAuth = () => {
-    const auth = useContext(AuthContext);
-    if(!auth){
-        throw Error('useAuth needs to be used inside AuthContext');
-    }
-    return auth;
-}
+export const useAuth = () => {
+  const auth = useContext(AuthContext);
+  if (!auth) {
+    throw Error('useAuth needs to be used inside AuthContext');
+  }
+  return auth;
+};

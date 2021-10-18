@@ -53,10 +53,6 @@ const AddUser = () => {
       field: e.target.name,
       value: e.target.value,
     });
-    // setFormValues({
-    //   ...formValues,
-    //   [e.target.name]: e.target.value,
-    // });
   };
   const handleSubmitUser = (e) => {
     e.preventDefault();
@@ -91,10 +87,5 @@ const AddUser = () => {
     </ViewWrapper>
   );
 };
-
-// AddUser.propTypes = {
-//   formValues: PropTypes.shape(UserShape),
-//   handleInputChange: PropTypes.func.isRequired,
-// };
 
 export default AddUser;
