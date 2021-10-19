@@ -8,6 +8,8 @@ import FormField from 'components/molecules/FormField/FormField';
 import { Button } from 'components/atoms/Button/Button';
 //import { useForm } from 'react-hook-form';
 import { useAuth } from 'hooks/useAuth';
+import { useError } from 'hooks/useError';
+import ErrorMessage from 'components/molecules/EroorMessage/ErrorMessage';
 const AuthenticatedApp = () => {
   return (
     <MainTemplate>
@@ -94,7 +96,13 @@ const UnAuthenticatedApp = () => {
 // };
 const Root = () => {
   const auth = useAuth();
+  const { error } = useError();
 
-  return auth.user ? <AuthenticatedApp /> : <UnAuthenticatedApp />;
+  return (
+    <>
+      {error ? <ErrorMessage /> : null}
+      {auth.user ? <AuthenticatedApp /> : <UnAuthenticatedApp />}
+    </>
+  );
 };
 export default Root;

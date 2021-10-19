@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
+import { useError } from './useError';
 
 const AuthContext = React.createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const { dispatchError } = useError();
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -25,7 +26,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const singIn = async ({ login, password }) => {
-    
     try {
       const response = await axios.post('/login', {
         login,
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       setUser(response.data);
       localStorage.setItem('token', response.data.token);
     } catch (e) {
-      console.log(e);
+      dispatchError('eror login or password');
     }
   };
   const singOut = () => {
