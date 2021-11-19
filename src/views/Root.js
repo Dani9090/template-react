@@ -50,50 +50,6 @@ const UnAuthenticatedApp = () => {
   );
 };
 
-// const Root = () => {
-//   const [user, setUser] = React.useState(null);
-//   const [error, setError] = React.useState(null);
-
-//   React.useEffect(() => {
-//     const token = localStorage.getItem('token');
-//     if (token) {
-//       (async () => {
-//         try {
-//           const response = await axios.get('/me', {
-//             headers: {
-//               authorization: `Bearer ${token}`,
-//             },
-//           });
-//           setUser(response.data);
-//         } catch (e) {
-//           console.log(e);
-//         }
-//       })();
-//     }
-//   }, []);
-
-//   const handleSingIn = async ({ login, password }) => {
-//     try {
-//       const response = await axios.post('/login', {
-//         login,
-//         password,
-//       });
-//       setUser(response.data);
-//       localStorage.setItem('token', response.data.token);
-//     } catch (e) {
-//       setError('Please provide valid user data');
-//     }
-//   };
-
-//   return (
-//     <Router>
-//       <ThemeProvider theme={theme}>
-//         <GlobalStyle />
-//         {user ? <AuthenticatedApp /> : <UnAuthenticatedApp loginError={error} handleSingIn={handleSingIn} />}
-//       </ThemeProvider>
-//     </Router>
-//   );
-// };
 const Root = () => {
   const auth = useAuth();
   const { error } = useError();
